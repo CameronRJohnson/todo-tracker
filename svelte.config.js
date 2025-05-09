@@ -14,7 +14,7 @@ const config = {
 	}),
 
     paths: {
-      base: 'Cameron-Showcase/todo-tracker', // important for GitHub Pages
+      base: '/todo-tracker', // important for GitHub Pages
     }
   }
 };
