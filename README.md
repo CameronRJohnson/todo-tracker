@@ -9,7 +9,7 @@ was also made to prove a proficiency in using an external database such as Supab
 To access the live page please go to (https://cameronrjohnson.github.io/todo-tracker/)
 (Note: Please keep in mind that this table might be frozen due to the inactivity)
 
-For a visual walkthrough please refer to this youtube video: FIX ME
+For a visual walkthrough please refer to this youtube video: (https://www.youtube.com/watch?v=R0bLiu-wW1s)
 
 # Development Environment
 
