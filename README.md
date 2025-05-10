@@ -5,7 +5,7 @@ This is a simple todo list tracker that can be used to help stay on top of tasks
 To access the live page please go to (https://cameronrjohnson.github.io/todo-tracker/)
 (Note: Please keep in mind that this table might be frozen due to the inactivity)
 
-For a visual walkthrough please refer to this youtube video: 
+For a visual walkthrough please refer to this youtube video: FIX ME
 
 # Development Environment
 
