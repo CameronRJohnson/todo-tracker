@@ -12,14 +12,14 @@
 	};
 
 	let newTodo = { name: '', goal: '', complete_by: '' };
-	let editingTodoId: string | null = null;
+	let editTaskId: string | null = null;
 	let editedTodo = { name: '', goal: '', complete_by: '' };
 
 
 	// Insert a new row into the todo table
-	async function addTodo() {
+	async function addTask() {
 		if (newTodo.name && newTodo.goal && newTodo.complete_by) {
-			const { data: insertedTodo, error } = await supabase
+			const { data: insertedTodo } = await supabase
 				.from('todo')
 				.insert([newTodo])
 				.select()
@@ -31,54 +31,47 @@
 	}
 
 	// Delete a row from the todo table
-	async function removeTodo(id: string) {
-		const { error } = await supabase
+	async function removeTask(id: string) {
+		const {} = await supabase
 			.from('todo')
 			.delete()
 			.eq('id', id);
 
-		if (error) {
-			return;
-		}
 
 		// Filter out the tasks that have the same id
 		data.todos = data.todos.filter(todo => todo.id !== id);
 	}
 
 	// Sets the editing mode to the row id
-	function startEditing(todo: { id: string; name: string; goal: string; complete_by: string }) {
-		editingTodoId = todo.id;
-		editedTodo = { ...todo };
+	function startEdit(task: { id: string; name: string; goal: string; complete_by: string }) {
+		editTaskId = task.id;
+		editedTodo = { ...task };
 	}
 
 	// Saves the updated row to the table
 	async function saveEdit() {
-		if (!editingTodoId) return;
+		if (!editTaskId) return;
 
-		const { error } = await supabase
+		const { } = await supabase
 			.from('todo')
 			.update({
 				name: editedTodo.name,
 				goal: editedTodo.goal,
 				complete_by: editedTodo.complete_by
 			})
-			.eq('id', editingTodoId);
-
-		if (error) {
-			return;
-		}
+			.eq('id', editTaskId);
 		
 		// Find and map the task with the new data
 		data.todos = data.todos.map(todo =>
-			todo.id === editingTodoId ? { ...todo, ...editedTodo } : todo
+			todo.id === editTaskId ? { ...todo, ...editedTodo } : todo
 		);
 
-		editingTodoId = null;
+		editTaskId = null;
 	}
 
 	// Unset the editing mode
 	function cancelEdit() {
-		editingTodoId = null;
+		editTaskId = null;
 	}
 </script>
 
@@ -90,7 +83,7 @@
 	
 
 	<!-- Top Form -->
-	<form class="mb-6" on:submit|preventDefault={addTodo}>
+	<form class="mb-6" on:submit|preventDefault={addTask}>
 		<div class="grid gap-4 mb-4">
 			<input
 				type="text"
@@ -126,7 +119,7 @@
 			<!-- Check to see if we are editing by checking the bool -->
 			{#each data.todos as todo (todo.id)}
 				<div class="bg-white rounded-2xl shadow-md p-4 border border-gray-200 hover:shadow-lg transition">
-					{#if editingTodoId === todo.id}
+					{#if editTaskId === todo.id}
 						<input
 							type="text"
 							bind:value={editedTodo.name}
@@ -159,25 +152,25 @@
 					{:else}
 						<h2
 							class="text-xl font-semibold"
-							on:dblclick={() => startEditing(todo)}
+							on:dblclick={() => startEdit(todo)}
 						>
 							{todo.name}
 						</h2>
 						<p
 							class="text-gray-700 mb-2"
-							on:dblclick={() => startEditing(todo)}
+							on:dblclick={() => startEdit(todo)}
 						>
 							{todo.goal}
 						</p>
 						<p
 							class="text-sm text-gray-500"
-							on:dblclick={() => startEditing(todo)}
+							on:dblclick={() => startEdit(todo)}
 						>
 							Complete by:
 							{new Date(new Date(todo.complete_by).setDate(new Date(todo.complete_by).getDate() + 1)).toLocaleDateString()}
 						</p>
 						<button
-							on:click={() => removeTodo(todo.id)}
+							on:click={() => removeTask(todo.id)}
 							class="text-lime-500 mt-2 hover:underline"
 						>
 							Complete
