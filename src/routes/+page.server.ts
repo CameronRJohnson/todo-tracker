@@ -6,7 +6,7 @@ import type { PageServerLoad } from './$types'
 export const load: PageServerLoad = async () => {
   const { data, error } = await supabase
     .from('todo')
-    .select('name, goal, complete_by')
+    .select('id, name, goal, complete_by')
     // We use order so the most present tasks are first.
     .order('complete_by', { ascending: true })
 
