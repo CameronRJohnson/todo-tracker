@@ -32,6 +32,7 @@
 
 	// Delete a row from the todo table
 	async function removeTask(id: string) {
+		alert(id)
 		const {} = await supabase
 			.from('todo')
 			.delete()
