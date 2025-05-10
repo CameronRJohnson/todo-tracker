@@ -101,6 +101,7 @@
 				type="date"
 				bind:value={newTodo.complete_by}
 				class="border rounded p-2 w-full"
+				min={new Date().toISOString().split('T')[0]}
 			/>
 		</div>
 		<button
@@ -134,6 +135,7 @@
 							type="date"
 							bind:value={editedTodo.complete_by}
 							class="border rounded p-2 w-full mb-2"
+							min={new Date().toISOString().split('T')[0]}
 						/>
 						<div class="flex gap-2">
 							<button

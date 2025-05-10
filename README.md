@@ -1,6 +1,10 @@
-# Database Based Todo List Tracker
+# Overview
 
-This is a simple todo list tracker that can be used to help stay on top of tasks.
+A Todo List Tracking Website.
+
+The purpose of this site is to be able to build a todo list that keeps track
+of a users current goals with the ability to update and or remove goals. This site
+was also made to prove a proficiency in using an external database such as Supabase.
 
 To access the live page please go to (https://cameronrjohnson.github.io/todo-tracker/)
 (Note: Please keep in mind that this table might be frozen due to the inactivity)
@@ -10,9 +14,11 @@ For a visual walkthrough please refer to this youtube video: FIX ME
 # Development Environment
 
 I am using the Supabase Database to handle all of the external storage. I am also 
-using the Sveltekit framework in combination with TypeScript for the UI.
+using the Sveltekit framework with svelte and tailwind to handle all of
+The UI. Typescript is used to handle the servers and scripts.
 
 # Useful Websites
 
 * [Sveltekit Docs](https://svelte.dev/docs/kit/introduction)
 * [Supabase & Sveltekit Docs](https://supabase.com/docs/guides/getting-started/quickstarts/sveltekit)
+* [Filtering Rows](https://stackoverflow.com/questions/69323625/how-can-i-filter-out-an-item-by-its-id)
