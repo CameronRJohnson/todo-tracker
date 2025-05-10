@@ -4,7 +4,7 @@
 
 	export let data: {
 		todos: {
-			id: string;
+			id: number;
 			name: string;
 			goal: string;
 			complete_by: string;
@@ -12,7 +12,7 @@
 	};
 
 	let newTodo = { name: '', goal: '', complete_by: '' };
-	let editTaskId: string | null = null;
+	let editTaskId: number | null = null;
 	let editedTodo = { name: '', goal: '', complete_by: '' };
 
 
@@ -31,8 +31,7 @@
 	}
 
 	// Delete a row from the todo table
-	async function removeTask(id: string) {
-		alert(id)
+	async function removeTask(id: number) {
 		const {} = await supabase
 			.from('todo')
 			.delete()
@@ -44,7 +43,7 @@
 	}
 
 	// Sets the editing mode to the row id
-	function startEdit(task: { id: string; name: string; goal: string; complete_by: string }) {
+	function startEdit(task: { id: number; name: string; goal: string; complete_by: string }) {
 		editTaskId = task.id;
 		editedTodo = { ...task };
 	}
@@ -183,4 +182,7 @@
 			{/each}
 		</div>
 	{/if}
+<div class="text-center mt-6 text-gray-500 text-sm">
+	<p>Note: The database might be frozen due to inactivity. Please try again later if issues arise.</p>
+</div>
 </div>

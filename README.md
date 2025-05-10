@@ -5,9 +5,6 @@ The purpose of this site is to be able to build a todo list that keeps track
 of a users current goals with the ability to update and or remove goals. This site
 was also made to prove a proficiency in using an external database such as Supabase.
 
-[Live Site](https://cameronrjohnson.github.io/todo-tracker/)
-(Note: Please keep in mind that this table might be frozen due to the inactivity)
-
 [Visual Walkthrough](https://www.youtube.com/watch?v=R0bLiu-wW1s)
 
 # Development Environment
