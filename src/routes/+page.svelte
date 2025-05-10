@@ -1,5 +1,5 @@
 <script lang="ts">
-	// This is where we declare the imports
+	// Declare our imports, variables, and functions
 	import { supabase } from "$lib/supabaseClient";
 
 	export let data: {
@@ -12,8 +12,11 @@
 	};
 
 	let newTodo = { name: '', goal: '', complete_by: '' };
+	let editingTodoId: string | null = null;
+	let editedTodo = { name: '', goal: '', complete_by: '' };
 
-	// This function will search up the todo table and insert the new task
+
+	// Insert a new row into the todo table
 	async function addTodo() {
 		if (newTodo.name && newTodo.goal && newTodo.complete_by) {
 			const { data: insertedTodo, error } = await supabase
@@ -22,17 +25,12 @@
 				.select()
 				.single();
 
-			if (error) {
-				console.error('Error inserting todo:', error);
-				return;
-			}
-
 			data.todos = [...data.todos, insertedTodo];
 			newTodo = { name: '', goal: '', complete_by: '' };
 		}
 	}
 
-	// This function will look up the task in the todo table and delete it
+	// Delete a row from the todo table
 	async function removeTodo(id: string) {
 		const { error } = await supabase
 			.from('todo')
@@ -40,26 +38,20 @@
 			.eq('id', id);
 
 		if (error) {
-			console.error('Error deleting todo:', error);
 			return;
 		}
 
+		// Filter out the tasks that have the same id
 		data.todos = data.todos.filter(todo => todo.id !== id);
 	}
 
-	let editingTodoId: string | null = null;
-	let editedTodo = { name: '', goal: '', complete_by: '' };
-
-	// This function makes all the fields editable
-	// and sets the editingTodoId to the current todo id
-
+	// Sets the editing mode to the row id
 	function startEditing(todo: { id: string; name: string; goal: string; complete_by: string }) {
 		editingTodoId = todo.id;
 		editedTodo = { ...todo };
 	}
 
-	// This function replaces the current todo with the edited one
-	// and sets the editingTodoId to null
+	// Saves the updated row to the table
 	async function saveEdit() {
 		if (!editingTodoId) return;
 
@@ -73,10 +65,10 @@
 			.eq('id', editingTodoId);
 
 		if (error) {
-			console.error('Error updating todo:', error);
 			return;
 		}
-
+		
+		// Find and map the task with the new data
 		data.todos = data.todos.map(todo =>
 			todo.id === editingTodoId ? { ...todo, ...editedTodo } : todo
 		);
@@ -84,6 +76,7 @@
 		editingTodoId = null;
 	}
 
+	// Unset the editing mode
 	function cancelEdit() {
 		editingTodoId = null;
 	}

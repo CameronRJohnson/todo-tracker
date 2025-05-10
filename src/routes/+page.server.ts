@@ -11,7 +11,6 @@ export const load: PageServerLoad = async () => {
     .order('complete_by', { ascending: true })
 
   if (error) {
-    console.error('Error fetching todos:', error)
     return { todos: [] }
   }
 
